@@ -26,7 +26,7 @@ with DAG(
     tags=['Property Data']
 ) as buildingPermit_dag:
     params = PythonVirtualenvOperator(
-        task_id='test_params',
+        task_id='test_params2',
         provide_context=True,
         python_callable=params_step,
         params={'bucket_name':'sthomeowner', 'fileType':'BUILDINGPERMIT_', 'prefix':'attom/permit/building_permits/','stg_table':'homeowner.attom_building_permit_delta'},
