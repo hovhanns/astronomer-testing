@@ -9,6 +9,8 @@ env:
   ## Sets Deployment API key credentials as environment variables
   ASTRONOMER_KEY_ID: ${{ secrets.ASTRONOMER_KEY_ID }}
   ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRONOMER_KEY_SECRET }}
+  BASE_DOMAIN: astronomer-airflow.st.dev
+  RELEASE_NAME: my_release
 
 jobs:
   build:
@@ -16,8 +18,15 @@ jobs:
     steps:
     - name: checkout repo
       uses: actions/checkout@v3
-    - name: Deploy to Astro
-      run: |
-        curl -sSL install.astronomer.io | sudo bash -s
-        astro login
-        astro deploy
+    - name: Log in to registry
+      uses: docker/login-action@v1
+      with:
+        registry: registry.$BASE_DOMAIN
+        username: _
+        password: ${{ ASTRONOMER_KEY_SECRET }}
+    - name: Build image
+      run: docker build -t registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${{ github.sha }} .
+    - name: Run tests
+      run: docker run --rm registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${{ github.sha }} /bin/bash -c "pytest tests"
+    - name: Push image
+      run: docker push registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${{ github.sha }}
