@@ -14,7 +14,8 @@ def params_kwargs_step(params, **kwargs):
 
 default_args = {
     'owner': 'Vivek Bhadane',
-    'depends_on_past': False
+    'depends_on_past': False,
+    'start_date': datetime(2021, 1, 1)
 }
 
 with DAG(
