@@ -1,4 +1,3 @@
-from airflow.operators.python_operator import PythonOperator
 from airflow.operators.python import PythonVirtualenvOperator
 from airflow import DAG
 
@@ -22,11 +21,12 @@ default_args = {
 with DAG(
     dag_id='PropertyData_buildingPermit',
     default_args=default_args,
-    schedule_interval=None,
+    schedule=None,
     tags=['Property Data']
 ) as buildingPermit_dag:
     params = PythonVirtualenvOperator(
         task_id='test_params2',
+        requirements=["pandas"],
         provide_context=True,
         python_callable=params_step,
         params={'bucket_name':'sthomeowner', 'fileType':'BUILDINGPERMIT_', 'prefix':'attom/permit/building_permits/','stg_table':'homeowner.attom_building_permit_delta'},
@@ -35,6 +35,7 @@ with DAG(
     params_kwargs = PythonVirtualenvOperator(
         task_id='test_params',
         provide_context=True,
+        requirements=["pandas"],
         python_callable=params_kwargs_step,
         params={'bucket_name':'sthomeowner', 'fileType':'BUILDINGPERMIT_', 'prefix':'attom/permit/building_permits/','stg_table':'homeowner.attom_building_permit_delta'},
         dag=buildingPermit_dag
