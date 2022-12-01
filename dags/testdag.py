@@ -1,4 +1,4 @@
-from airflow.operators.python import PythonVirtualenvOperator
+from airflow.operators.python import PythonVirtualenvOperator, PythonOperator
 from airflow import DAG
 
 from datetime import datetime
@@ -26,19 +26,23 @@ with DAG(
 ) as buildingPermit_dag:
     params = PythonVirtualenvOperator(
         task_id='test_params2',
-        requirements=["pandas"],
         provide_context=True,
         python_callable=params_step,
         params={'bucket_name':'sthomeowner', 'fileType':'BUILDINGPERMIT_', 'prefix':'attom/permit/building_permits/','stg_table':'homeowner.attom_building_permit_delta'},
-        dag=buildingPermit_dag
+        dag=buildingPermit_dag,
+        executor_config={
+            "pod_template_file": "/tmp/copied_pod_template.yaml",
+        },
     )
     params_kwargs = PythonVirtualenvOperator(
         task_id='test_params',
         provide_context=True,
-        requirements=["pandas"],
         python_callable=params_kwargs_step,
         params={'bucket_name':'sthomeowner', 'fileType':'BUILDINGPERMIT_', 'prefix':'attom/permit/building_permits/','stg_table':'homeowner.attom_building_permit_delta'},
-        dag=buildingPermit_dag
+        dag=buildingPermit_dag,
+        executor_config={
+            "pod_template_file": "/tmp/copied_pod_template.yaml",
+        },
     )
 
 params >> params_kwargs
