@@ -29,20 +29,14 @@ with DAG(
         provide_context=True,
         python_callable=params_step,
         params={'bucket_name':'sthomeowner', 'fileType':'BUILDINGPERMIT_', 'prefix':'attom/permit/building_permits/','stg_table':'homeowner.attom_building_permit_delta'},
-        dag=buildingPermit_dag,
-        executor_config={
-            "pod_template_file": "/tmp/copied_pod_template.yaml",
-        },
+        dag=buildingPermit_dag
     )
     params_kwargs = PythonVirtualenvOperator(
         task_id='test_params',
         provide_context=True,
         python_callable=params_kwargs_step,
         params={'bucket_name':'sthomeowner', 'fileType':'BUILDINGPERMIT_', 'prefix':'attom/permit/building_permits/','stg_table':'homeowner.attom_building_permit_delta'},
-        dag=buildingPermit_dag,
-        executor_config={
-            "pod_template_file": "/tmp/copied_pod_template.yaml",
-        },
+        dag=buildingPermit_dag
     )
 
 params >> params_kwargs
