@@ -1,6 +1,0 @@
----
-KubernetesExecutor:
-  request_cpu: 300m
-  limit_cpu: 400m
-  request_memory: 750Mi
-  limit_memory: 800Mi

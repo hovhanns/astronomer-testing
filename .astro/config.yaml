@@ -1,2 +1,8 @@
 project:
   name: astronomer-testing
+astronomer:
+  houston:
+    config:
+      deployments:
+        configureDagDeployment: true
+        gitSyncDagDeployment: true
