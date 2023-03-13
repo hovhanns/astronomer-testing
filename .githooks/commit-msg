@@ -15,6 +15,7 @@ The commit message should meet the following format
 detailed description
 "
 
+
 if ! grep -iqE "$commit_regex" "$1"; then
     echo "$error_msg" >&2
     exit 1
