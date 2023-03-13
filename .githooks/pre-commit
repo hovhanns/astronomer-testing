@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+#branch name validation
+
 LC_ALL=C
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
@@ -24,6 +27,11 @@ then
     echo "$message"
     exit 1
 fi
+
+#commit message validation
+
+
+
 
 exit 0
 
