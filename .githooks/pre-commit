@@ -28,7 +28,7 @@ then
     exit 1
 fi
 
-
+# syncing development branch with master before commit
 if [[ ! -z $(git rev-list ..main) ]]
 then
     echo "abandoning commit"
