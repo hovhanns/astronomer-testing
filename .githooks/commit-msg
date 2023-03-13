@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+## ^(feature|bugfix|release|hotfix) ([A-Z]+-[0-9]+) \w+( \w+){0,4}\\n{2}.*$
+
+## shell doesn't support new-line \n in regex, thus the multiline regex is used
+commit_regex="^(feature|bugfix|release|hotfix) ([A-Z]+-[0-9]+) \w+( \w+){0,4}
+
+.*$"
+
+error_msg="Aborting commit. Your commit message isn't met the format requirements
+The commit message should meet the following format
+'''
+{ feature | bugfix | release } <white space> {TICKET-#} <white space> brief description upto 5 words
+<new line>
+detailed description
+"
+
+if ! grep -iqE "$commit_regex" "$1"; then
+    echo "$error_msg" >&2
+    exit 1
+fi
+
+
+exit 0

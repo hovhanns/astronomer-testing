@@ -11,7 +11,7 @@ valid_branch_regex="^((feature|bugfix|release|hotfix)\/([A-Z]+-[0-9]+)/([a-z0-9.
 message="There is something wrong with your branch name.
 Branch names in this project must adhere to this contract: $valid_branch_regex. 
 Your commit will be rejected. You should rename your branch to a valid name and try again.
-The valid branch name example is: { feature | bugfix | release } / {Ticket #} / <brief-description-upto-five-words>'
+The valid branch name example is: { feature | bugfix | release } / {TICKET-#} / <brief-description-upto-five-words>'
 
 Steps to rename the Branch name:
 
