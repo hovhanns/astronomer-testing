@@ -28,12 +28,13 @@ then
     exit 1
 fi
 
+DEFAULT_BRANCH='main'
 # syncing development branch with master before commit
-if [[ ! -z $(git rev-list ..main) ]]
+if [[ ! -z $(git rev-list ..$DEFAULT_BRANCH) ]]
 then
     echo "abandoning commit"
-    echo "please rebase from main and try again"
-    echo "Hint: git fetch --all && git rebase main"
+    echo "please rebase from $DEFAULT_BRANCH and try again"
+    echo "Hint: git fetch --all && git rebase $DEFAULT_BRANCH"
     exit 1
 fi
 
