@@ -28,10 +28,17 @@ then
     exit 1
 fi
 
-#commit message validation
 
-
+if [[ ! -z $(git rev-list ..main) ]]
+then
+    echo "abandoning commit"
+    echo "please rebase from main and try again"
+    echo "Hint: git fetch --all && git rebase main"
+    exit 1
+fi
 
 
 exit 0
+
+
 
