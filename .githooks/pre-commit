@@ -29,10 +29,11 @@ then
 fi
 
 
-if [ ! -z $(git rev-list ..main) ]
+if [[ ! -z $(git rev-list ..main) ]]
 then
     echo "abandoning commit"
-    echo "please merge from main and try again"
+    echo "please rebase from main and try again"
+    echo "Hint: git fetch --all && git rebase main"
     exit 1
 fi
 
