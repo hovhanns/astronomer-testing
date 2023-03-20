@@ -19,7 +19,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id='PropertyData_buildingPermit',
+    dag_id='dag-id-fromtestdag',
     default_args=default_args,
     schedule=None,
     tags=['Property Data']
