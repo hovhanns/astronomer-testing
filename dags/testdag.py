@@ -19,7 +19,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id='dag-id-fromtestdag',
+    dag_id='dag-id-fromtestdag-other',
     default_args=default_args,
     schedule=None,
     tags=['Property Data']
