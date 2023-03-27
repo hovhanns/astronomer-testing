@@ -7,6 +7,7 @@ def params_step(params):
     print(params)
     print("yay it works!")
     print("and maybe nyet")
+    print("and maybe nyet123")
 
 def params_kwargs_step(params, **kwargs):
     print(params)
