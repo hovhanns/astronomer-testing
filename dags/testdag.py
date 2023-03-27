@@ -6,6 +6,7 @@ from datetime import datetime
 def params_step(params):
     print(params)
     print("yay it works!")
+    print("and maybe nyet")
 
 def params_kwargs_step(params, **kwargs):
     print(params)
@@ -19,7 +20,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id='dag-id-fromtestdag',
+    dag_id='dag-id-from-test',
     default_args=default_args,
     schedule=None,
     tags=['Property Data']
